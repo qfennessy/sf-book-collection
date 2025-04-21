@@ -56,6 +56,7 @@ public class BookServiceImpl implements BookService {
         // Copy properties from DTO to entity, but avoid overriding the collections/relations
         Book bookToUpdate = bookMapper.toEntity(bookDTO);
         bookToUpdate.setAuthors(existingBook.getAuthors());
+        bookToUpdate.setCollections(existingBook.getCollections());
         
         Book updatedBook = bookRepository.save(bookToUpdate);
         return bookMapper.toDto(updatedBook);

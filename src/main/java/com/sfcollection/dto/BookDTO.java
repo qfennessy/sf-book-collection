@@ -40,4 +40,5 @@ public class BookDTO {
     private ReadStatus readStatus;
     private LocalDateTime dateAdded;
     private Set<AuthorSummaryDTO> authors;
+    private Set<CollectionSummaryDTO> collections;
 }

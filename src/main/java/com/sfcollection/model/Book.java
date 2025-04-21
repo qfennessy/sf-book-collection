@@ -62,6 +62,10 @@ public class Book {
     @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY)
     @Builder.Default
     private Set<Author> authors = new HashSet<>();
+    
+    @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set<Collection> collections = new HashSet<>();
 
     @PrePersist
     protected void onCreate() {

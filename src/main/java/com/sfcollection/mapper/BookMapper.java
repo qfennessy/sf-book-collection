@@ -8,10 +8,11 @@ import org.mapstruct.Mapping;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", uses = {AuthorMapper.class})
+@Mapper(componentModel = "spring", uses = {AuthorMapper.class, CollectionMapper.class})
 public interface BookMapper {
     
     @Mapping(target = "authors", source = "authors")
+    @Mapping(target = "collections", source = "collections")
     BookDTO toDto(Book book);
     
     @Mapping(target = "authors", ignore = true)
