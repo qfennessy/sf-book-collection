@@ -106,9 +106,44 @@ For production, configure PostgreSQL in the application.yml file.
 
 ## Testing
 
-Run the tests with:
+### Running All Tests
+
+Run all tests with:
 ```
 mvn test
+```
+
+Note: The controller tests require proper security configuration and may fail if security settings are changed during development.
+
+### Running Specific Tests
+
+For more targeted testing during development:
+
+#### Service Layer Tests Only
+```
+mvn test -Dtest=BookServiceImplTest,AuthorServiceImplTest,CollectionServiceImplTest
+```
+
+#### Individual Test Classes
+```
+mvn test -Dtest=BookServiceImplTest
+mvn test -Dtest=AuthorServiceImplTest
+mvn test -Dtest=CollectionServiceImplTest
+```
+
+#### Exclude Controller Tests
+```
+mvn test -Dtest=!*ControllerTest
+```
+
+#### Build Without Running Tests
+```
+mvn clean install -DskipTests
+```
+
+#### Compile Tests Without Running Them
+```
+mvn clean install -Dmaven.test.skip=false -DskipTests
 ```
 
 ## Security
