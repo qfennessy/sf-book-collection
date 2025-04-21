@@ -15,6 +15,8 @@ spring:
     console:
       enabled: true
       path: /h2-console
+  profiles:
+    active: dev
 
 server:
   port: 8080
@@ -27,3 +29,29 @@ springdoc:
   swagger-ui:
     path: /swagger-ui.html
     operations-sorter: method
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,metrics,info,prometheus
+  endpoint:
+    health:
+      show-details: when_authorized
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    export:
+      prometheus:
+        enabled: true
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:changeme_in_production_this_should_be_very_long_and_secure_key_at_least_64_chars}
+    expiration: 86400000 # 24 hours in milliseconds
+
+logging:
+  level:
+    root: INFO
+    com.sfcollection: DEBUG
+    org.springframework.security: INFO

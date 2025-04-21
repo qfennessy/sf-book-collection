@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,6 +31,9 @@ public class BookController {
     @Operation(summary = "Create a new book", description = "Creates a new book in the collection")
     @ApiResponse(responseCode = "201", description = "Book created successfully")
     @ApiResponse(responseCode = "400", description = "Bad request - invalid input")
+    @ApiResponse(responseCode = "401", description = "Unauthorized - authentication required")
+    @ApiResponse(responseCode = "403", description = "Forbidden - not enough privileges")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<ResponseDTO<BookDTO>> createBook(
             @Valid @RequestBody BookCreateDTO bookCreateDTO) {
         BookDTO createdBook = bookService.createBook(bookCreateDTO);
@@ -93,6 +97,9 @@ public class BookController {
     @ApiResponse(responseCode = "200", description = "Book updated successfully")
     @ApiResponse(responseCode = "404", description = "Book not found")
     @ApiResponse(responseCode = "400", description = "Bad request - invalid input")
+    @ApiResponse(responseCode = "401", description = "Unauthorized - authentication required")
+    @ApiResponse(responseCode = "403", description = "Forbidden - not enough privileges")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<ResponseDTO<BookDTO>> updateBook(
             @PathVariable Long id, 
             @Valid @RequestBody BookUpdateDTO bookUpdateDTO) {
@@ -106,6 +113,9 @@ public class BookController {
     @ApiResponse(responseCode = "200", description = "Book updated successfully")
     @ApiResponse(responseCode = "404", description = "Book not found")
     @ApiResponse(responseCode = "400", description = "Bad request - invalid input")
+    @ApiResponse(responseCode = "401", description = "Unauthorized - authentication required")
+    @ApiResponse(responseCode = "403", description = "Forbidden - not enough privileges")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<ResponseDTO<BookDTO>> patchBook(
             @PathVariable Long id, 
             @Valid @RequestBody BookPatchDTO bookPatchDTO) {
@@ -118,6 +128,9 @@ public class BookController {
     @Operation(summary = "Delete a book", description = "Deletes a book from the collection")
     @ApiResponse(responseCode = "204", description = "Book deleted successfully")
     @ApiResponse(responseCode = "404", description = "Book not found")
+    @ApiResponse(responseCode = "401", description = "Unauthorized - authentication required")
+    @ApiResponse(responseCode = "403", description = "Forbidden - insufficient privileges, requires ADMIN role")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();
@@ -127,6 +140,9 @@ public class BookController {
     @Operation(summary = "Add author to book", description = "Adds an author to a book")
     @ApiResponse(responseCode = "200", description = "Author added to book successfully")
     @ApiResponse(responseCode = "404", description = "Book or author not found")
+    @ApiResponse(responseCode = "401", description = "Unauthorized - authentication required")
+    @ApiResponse(responseCode = "403", description = "Forbidden - not enough privileges")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<ResponseDTO<BookDTO>> addAuthorToBook(
             @PathVariable Long bookId, 
             @PathVariable Long authorId) {
@@ -139,6 +155,9 @@ public class BookController {
     @Operation(summary = "Remove author from book", description = "Removes an author from a book")
     @ApiResponse(responseCode = "200", description = "Author removed from book successfully")
     @ApiResponse(responseCode = "404", description = "Book or author not found")
+    @ApiResponse(responseCode = "401", description = "Unauthorized - authentication required")
+    @ApiResponse(responseCode = "403", description = "Forbidden - not enough privileges")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<ResponseDTO<BookDTO>> removeAuthorFromBook(
             @PathVariable Long bookId, 
             @PathVariable Long authorId) {
