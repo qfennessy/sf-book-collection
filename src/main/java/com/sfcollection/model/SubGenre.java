@@ -1,0 +1,23 @@
+package com.sfcollection.model;
+
+public enum SubGenre {
+    SPACE_OPERA,
+    CYBERPUNK,
+    DYSTOPIAN,
+    POST_APOCALYPTIC,
+    HARD_SF,
+    FIRST_CONTACT,
+    TIME_TRAVEL,
+    ALTERNATE_HISTORY,
+    MILITARY_SF,
+    ALIEN_INVASION,
+    SPACE_EXPLORATION,
+    STEAMPUNK,
+    BIOPUNK,
+    CLIMATE_FICTION,
+    SUPERHERO,
+    ROBOT_FICTION,
+    VIRTUAL_REALITY,
+    SPACE_WESTERN,
+    OTHER
+}
