@@ -44,7 +44,6 @@ class BookServiceImplTest {
     private BookCreateDTO testBookCreateDTO;
     private BookUpdateDTO testBookUpdateDTO;
     private BookPatchDTO testBookPatchDTO;
-    private Author testAuthor;
     private Pageable pageable;
 
     @BeforeEach
@@ -60,13 +59,6 @@ class BookServiceImplTest {
         bookService = new BookServiceImpl(bookRepository, authorRepository, bookMapper);
         
         // Set up test data
-        testAuthor = Author.builder()
-                .id(1L)
-                .name("Frank Herbert")
-                .biography("American science fiction author")
-                .books(new HashSet<>())
-                .build();
-                
         testBook = Book.builder()
                 .id(1L)
                 .title("Dune")

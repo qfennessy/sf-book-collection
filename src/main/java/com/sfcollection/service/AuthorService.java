@@ -3,7 +3,6 @@ package com.sfcollection.service;
 import com.sfcollection.dto.AuthorDTO;
 
 import java.util.List;
-import java.util.Set;
 
 public interface AuthorService {
     AuthorDTO createAuthor(AuthorDTO authorDTO);

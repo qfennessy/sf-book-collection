@@ -1,0 +1,7 @@
+com/sfcollection/service/AuthorServiceImplTest.class
+com/sfcollection/service/BookServiceImplTest.class
+com/sfcollection/controller/AuthorControllerTest.class
+com/sfcollection/service/BookServiceImplTest$TestBookMapper.class
+com/sfcollection/service/CollectionServiceImplTest.class
+com/sfcollection/controller/CollectionControllerTest.class
+com/sfcollection/controller/BookControllerTest.class
