@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "books")
@@ -56,6 +58,10 @@ public class Book {
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime dateAdded;
+    
+    @ManyToMany(mappedBy = "books", fetch = FetchType.LAZY)
+    @Builder.Default
+    private Set<Author> authors = new HashSet<>();
 
     @PrePersist
     protected void onCreate() {

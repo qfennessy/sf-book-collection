@@ -149,4 +149,32 @@ class BookControllerTest {
 
         verify(bookService, times(1)).deleteBook(1L);
     }
+    
+    @Test
+    void addAuthorToBook_ShouldReturnUpdatedBook() throws Exception {
+        // Arrange
+        when(bookService.addAuthorToBook(anyLong(), anyLong())).thenReturn(testBookDTO);
+
+        // Act & Assert
+        mockMvc.perform(post("/api/v1/books/1/authors/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.id", is(1)))
+                .andExpect(jsonPath("$.data.title", is("Dune")));
+
+        verify(bookService, times(1)).addAuthorToBook(1L, 1L);
+    }
+    
+    @Test
+    void removeAuthorFromBook_ShouldReturnUpdatedBook() throws Exception {
+        // Arrange
+        when(bookService.removeAuthorFromBook(anyLong(), anyLong())).thenReturn(testBookDTO);
+
+        // Act & Assert
+        mockMvc.perform(delete("/api/v1/books/1/authors/1"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.id", is(1)))
+                .andExpect(jsonPath("$.data.title", is("Dune")));
+
+        verify(bookService, times(1)).removeAuthorFromBook(1L, 1L);
+    }
 }

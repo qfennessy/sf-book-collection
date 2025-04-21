@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Builder
@@ -38,4 +39,5 @@ public class BookDTO {
     
     private ReadStatus readStatus;
     private LocalDateTime dateAdded;
+    private Set<AuthorSummaryDTO> authors;
 }

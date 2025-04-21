@@ -91,4 +91,36 @@ public class BookController {
         bookService.deleteBook(id);
         return ResponseEntity.noContent().build();
     }
+    
+    @PostMapping("/{bookId}/authors/{authorId}")
+    @Operation(summary = "Add author to book", description = "Adds an author to a book")
+    @ApiResponse(responseCode = "200", description = "Author added to book successfully")
+    @ApiResponse(responseCode = "404", description = "Book or author not found")
+    public ResponseEntity<Map<String, Object>> addAuthorToBook(
+            @PathVariable Long bookId, 
+            @PathVariable Long authorId) {
+        
+        BookDTO updatedBook = bookService.addAuthorToBook(bookId, authorId);
+        Map<String, Object> response = Map.of(
+            "data", updatedBook,
+            "meta", Map.of("timestamp", java.time.LocalDateTime.now())
+        );
+        return ResponseEntity.ok(response);
+    }
+    
+    @DeleteMapping("/{bookId}/authors/{authorId}")
+    @Operation(summary = "Remove author from book", description = "Removes an author from a book")
+    @ApiResponse(responseCode = "200", description = "Author removed from book successfully")
+    @ApiResponse(responseCode = "404", description = "Book or author not found")
+    public ResponseEntity<Map<String, Object>> removeAuthorFromBook(
+            @PathVariable Long bookId, 
+            @PathVariable Long authorId) {
+        
+        BookDTO updatedBook = bookService.removeAuthorFromBook(bookId, authorId);
+        Map<String, Object> response = Map.of(
+            "data", updatedBook,
+            "meta", Map.of("timestamp", java.time.LocalDateTime.now())
+        );
+        return ResponseEntity.ok(response);
+    }
 }
