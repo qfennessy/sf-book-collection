@@ -1,15 +1,21 @@
 package com.sfcollection.service;
 
-import com.sfcollection.dto.BookDTO;
+import com.sfcollection.dto.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface BookService {
-    BookDTO createBook(BookDTO bookDTO);
+    BookDTO createBook(BookCreateDTO bookCreateDTO);
     BookDTO getBookById(Long id);
-    List<BookDTO> getAllBooks();
-    BookDTO updateBook(Long id, BookDTO bookDTO);
+    Page<BookDTO> getAllBooks(Pageable pageable);
+    Page<BookDTO> searchBooks(BookSearchDTO searchDTO, Pageable pageable);
+    BookDTO updateBook(Long id, BookUpdateDTO bookUpdateDTO);
+    BookDTO patchBook(Long id, BookPatchDTO bookPatchDTO);
     void deleteBook(Long id);
     BookDTO addAuthorToBook(Long bookId, Long authorId);
     BookDTO removeAuthorFromBook(Long bookId, Long authorId);
+    Page<BookDTO> getBooksByAuthor(Long authorId, Pageable pageable);
+    Page<BookDTO> getBooksByCollection(Long collectionId, Pageable pageable);
 }
