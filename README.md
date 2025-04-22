@@ -102,6 +102,36 @@ Connection details (default):
 - Username: `sa`
 - Password: `password`
 
+### Using the H2 Console
+
+1. Start the Spring Boot application:
+   ```
+   mvn spring-boot:run
+   ```
+
+2. Navigate to http://localhost:8080/h2-console in your browser
+
+3. Enter the connection details as shown above and click "Connect"
+
+4. Once connected, you can:
+   - View all database tables
+   - Run SQL queries to inspect or modify data
+   - Troubleshoot data-related issues
+
+### Executing SQL Scripts in H2 Console
+
+If you need to run SQL scripts directly (for example, to check or fix role assignments):
+
+1. Create a SQL file with your queries (an example is provided in `check_roles.sql`)
+
+2. Access the H2 Console as described above
+
+3. Copy and paste the contents of your SQL file into the console's query editor
+
+4. Click "Run" to execute the queries
+
+5. View the results in the console output
+
 For production, configure PostgreSQL in the application.yml file.
 
 ## Testing
@@ -155,6 +185,33 @@ The application uses JWT (JSON Web Token) for authentication and authorization:
 - Deleting resources requires ADMIN role
 - Admin user is created by default (username: admin, password: admin123) in development
 - Token expiration is configurable (default: 24 hours)
+
+### Using the Postman Collection
+
+A Postman collection is provided (`SF_Book_Collection_API.postman_collection.json`) to help test and interact with the API:
+
+1. Download and install [Postman](https://www.postman.com/downloads/)
+
+2. Import the collection:
+   - Open Postman
+   - Click "Import"
+   - Choose the `SF_Book_Collection_API.postman_collection.json` file 
+
+3. Testing Authentication:
+   - Start with the "Register New User" request in the Authentication folder
+   - Then try "Login (User)" or "Login (Admin)" to get a JWT token
+   - The collection automatically extracts and stores the JWT token for subsequent requests
+
+4. Working with Books, Authors, and Collections:
+   - Explore the respective folders in the collection
+   - Use the GET requests to view data (no authentication required)
+   - Use the POST, PUT, PATCH, and DELETE requests to modify data (authentication required)
+
+5. Troubleshooting Authentication:
+   - Ensure the Spring Boot application is running
+   - Check that roles are properly set up in the database using H2 Console
+   - Verify the JWT token is properly stored and included in authenticated requests
+   - Use the H2 Console to view the users table and check user credentials
 
 ## Monitoring
 

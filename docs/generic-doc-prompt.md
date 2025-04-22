@@ -1,6 +1,6 @@
 # Generic Documentation Generation Prompt
 
-**Objective:** Create foundational documentation for a software project, covering Architecture, API, Environments, and Testing. Generate four separate markdown files: `ARCHITECTURE.md`, `API.md`, `ENVIRONMENTS.md`, and `TESTING.md`. The content should be structured clearly and provide a solid starting point for project documentation, adaptable to various tech stacks and application types.
+**Objective:** Review the current codebase in depth and use that information to create  documentation, covering Architecture, API, Environments, and Testing. Generate four separate markdown files and store them in the `docs/agents` directory: `ARCHITECTURE.md`, `API.md`, `ENVIRONMENTS.md`, and `TESTING.md`. The content should be structured clearly and provide a solid starting point for project documentation, .
 
 **Instructions:**
 

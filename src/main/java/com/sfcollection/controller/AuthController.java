@@ -106,21 +106,40 @@ public class AuthController {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null || strRoles.isEmpty()) {
-            Role userRole = roleRepository.findByName(Role.RoleName.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
+            try {
+                Role userRole = roleRepository.findByName(Role.RoleName.ROLE_USER)
+                        .orElseThrow(() -> new RuntimeException("Error: User Role not found in database."));
+                roles.add(userRole);
+            } catch (Exception e) {
+                // Create default roles if they don't exist
+                try {
+                    Role userRole = new Role();
+                    userRole.setName(Role.RoleName.ROLE_USER);
+                    roleRepository.save(userRole);
+                    roles.add(userRole);
+                } catch (Exception ex) {
+                    throw new RuntimeException("Error: Failed to create default role: " + ex.getMessage());
+                }
+            }
         } else {
             strRoles.forEach(role -> {
-                switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(Role.RoleName.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(Role.RoleName.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
+                try {
+                    switch (role.toLowerCase()) {
+                        case "admin":
+                            Role adminRole = roleRepository.findByName(Role.RoleName.ROLE_ADMIN)
+                                    .orElseThrow(() -> new RuntimeException("Error: Admin Role not found in database."));
+                            roles.add(adminRole);
+                            break;
+                        case "user":
+                            Role userRole = roleRepository.findByName(Role.RoleName.ROLE_USER)
+                                    .orElseThrow(() -> new RuntimeException("Error: User Role not found in database."));
+                            roles.add(userRole);
+                            break;
+                        default:
+                            throw new RuntimeException("Error: Invalid role '" + role + "'. Use 'user' or 'admin'.");
+                    }
+                } catch (Exception e) {
+                    throw new RuntimeException("Error assigning role '" + role + "': " + e.getMessage());
                 }
             });
         }

@@ -34,7 +34,15 @@ public class JwtUtils {
     }
     
     private Key key() {
-        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jwtSecret));
+        try {
+            // First try to decode with BASE64URL
+            return Keys.hmacShaKeyFor(Decoders.BASE64URL.decode(jwtSecret));
+        } catch (Exception e) {
+            logger.warn("JWT secret is not properly Base64URL encoded, using as raw bytes: {}", e.getMessage());
+            // If decoding fails, use the raw bytes of the string
+            // This ensures the key is used as-is without Base64 decoding
+            return Keys.hmacShaKeyFor(jwtSecret.getBytes());
+        }
     }
 
     public String getUserNameFromJwtToken(String token) {

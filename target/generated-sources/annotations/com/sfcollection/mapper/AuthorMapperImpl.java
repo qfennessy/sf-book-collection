@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-04-21T18:13:12-0400",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.42.0.z20250331-1358, environment: Java 21.0.6 (Eclipse Adoptium)"
+    date = "2025-04-21T21:08:41-0400",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Homebrew)"
 )
 @Component
 public class AuthorMapperImpl implements AuthorMapper {
@@ -33,10 +33,10 @@ public class AuthorMapperImpl implements AuthorMapper {
         AuthorDTO.AuthorDTOBuilder authorDTO = AuthorDTO.builder();
 
         authorDTO.books( bookSetToBookSummaryDTOSet( author.getBooks() ) );
-        authorDTO.biography( author.getBiography() );
-        authorDTO.birthDate( author.getBirthDate() );
         authorDTO.id( author.getId() );
         authorDTO.name( author.getName() );
+        authorDTO.biography( author.getBiography() );
+        authorDTO.birthDate( author.getBirthDate() );
         authorDTO.photoUrl( author.getPhotoUrl() );
 
         return authorDTO.build();
@@ -50,10 +50,10 @@ public class AuthorMapperImpl implements AuthorMapper {
 
         Author.AuthorBuilder author = Author.builder();
 
-        author.biography( authorDTO.getBiography() );
-        author.birthDate( authorDTO.getBirthDate() );
         author.id( authorDTO.getId() );
         author.name( authorDTO.getName() );
+        author.biography( authorDTO.getBiography() );
+        author.birthDate( authorDTO.getBirthDate() );
         author.photoUrl( authorDTO.getPhotoUrl() );
 
         return author.build();

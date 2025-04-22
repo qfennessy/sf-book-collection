@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-04-21T18:13:12-0400",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.42.0.z20250331-1358, environment: Java 21.0.6 (Eclipse Adoptium)"
+    date = "2025-04-21T21:08:41-0400",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Homebrew)"
 )
 @Component
 public class BookMapperImpl extends BookMapper {
@@ -35,19 +35,19 @@ public class BookMapperImpl extends BookMapper {
 
         bookDTO.authors( authorMapper.toSummaryDtoSet( book.getAuthors() ) );
         bookDTO.collections( collectionMapper.toSummaryDtoSet( book.getCollections() ) );
-        bookDTO.coverImage( book.getCoverImage() );
-        bookDTO.dateAdded( book.getDateAdded() );
-        bookDTO.description( book.getDescription() );
         bookDTO.id( book.getId() );
+        bookDTO.title( book.getTitle() );
         bookDTO.isbn( book.getIsbn() );
-        bookDTO.language( book.getLanguage() );
-        bookDTO.pageCount( book.getPageCount() );
         bookDTO.publishedDate( book.getPublishedDate() );
+        bookDTO.description( book.getDescription() );
+        bookDTO.coverImage( book.getCoverImage() );
+        bookDTO.subGenre( book.getSubGenre() );
+        bookDTO.pageCount( book.getPageCount() );
         bookDTO.publisher( book.getPublisher() );
+        bookDTO.language( book.getLanguage() );
         bookDTO.rating( book.getRating() );
         bookDTO.readStatus( book.getReadStatus() );
-        bookDTO.subGenre( book.getSubGenre() );
-        bookDTO.title( book.getTitle() );
+        bookDTO.dateAdded( book.getDateAdded() );
 
         return bookDTO.build();
     }
@@ -60,19 +60,19 @@ public class BookMapperImpl extends BookMapper {
 
         Book.BookBuilder book = Book.builder();
 
-        book.coverImage( bookDTO.getCoverImage() );
-        book.dateAdded( bookDTO.getDateAdded() );
-        book.description( bookDTO.getDescription() );
         book.id( bookDTO.getId() );
+        book.title( bookDTO.getTitle() );
         book.isbn( bookDTO.getIsbn() );
-        book.language( bookDTO.getLanguage() );
-        book.pageCount( bookDTO.getPageCount() );
         book.publishedDate( bookDTO.getPublishedDate() );
+        book.description( bookDTO.getDescription() );
+        book.coverImage( bookDTO.getCoverImage() );
+        book.subGenre( bookDTO.getSubGenre() );
+        book.pageCount( bookDTO.getPageCount() );
         book.publisher( bookDTO.getPublisher() );
+        book.language( bookDTO.getLanguage() );
         book.rating( bookDTO.getRating() );
         book.readStatus( bookDTO.getReadStatus() );
-        book.subGenre( bookDTO.getSubGenre() );
-        book.title( bookDTO.getTitle() );
+        book.dateAdded( bookDTO.getDateAdded() );
 
         return book.build();
     }
@@ -85,17 +85,17 @@ public class BookMapperImpl extends BookMapper {
 
         Book.BookBuilder book = Book.builder();
 
-        book.coverImage( createDTO.getCoverImage() );
-        book.description( createDTO.getDescription() );
+        book.title( createDTO.getTitle() );
         book.isbn( createDTO.getIsbn() );
-        book.language( createDTO.getLanguage() );
-        book.pageCount( createDTO.getPageCount() );
         book.publishedDate( createDTO.getPublishedDate() );
+        book.description( createDTO.getDescription() );
+        book.coverImage( createDTO.getCoverImage() );
+        book.subGenre( createDTO.getSubGenre() );
+        book.pageCount( createDTO.getPageCount() );
         book.publisher( createDTO.getPublisher() );
+        book.language( createDTO.getLanguage() );
         book.rating( createDTO.getRating() );
         book.readStatus( createDTO.getReadStatus() );
-        book.subGenre( createDTO.getSubGenre() );
-        book.title( createDTO.getTitle() );
 
         return book.build();
     }
@@ -106,38 +106,38 @@ public class BookMapperImpl extends BookMapper {
             return;
         }
 
-        if ( updateDTO.getCoverImage() != null ) {
-            book.setCoverImage( updateDTO.getCoverImage() );
-        }
-        if ( updateDTO.getDescription() != null ) {
-            book.setDescription( updateDTO.getDescription() );
+        if ( updateDTO.getTitle() != null ) {
+            book.setTitle( updateDTO.getTitle() );
         }
         if ( updateDTO.getIsbn() != null ) {
             book.setIsbn( updateDTO.getIsbn() );
         }
-        if ( updateDTO.getLanguage() != null ) {
-            book.setLanguage( updateDTO.getLanguage() );
+        if ( updateDTO.getPublishedDate() != null ) {
+            book.setPublishedDate( updateDTO.getPublishedDate() );
+        }
+        if ( updateDTO.getDescription() != null ) {
+            book.setDescription( updateDTO.getDescription() );
+        }
+        if ( updateDTO.getCoverImage() != null ) {
+            book.setCoverImage( updateDTO.getCoverImage() );
+        }
+        if ( updateDTO.getSubGenre() != null ) {
+            book.setSubGenre( updateDTO.getSubGenre() );
         }
         if ( updateDTO.getPageCount() != null ) {
             book.setPageCount( updateDTO.getPageCount() );
         }
-        if ( updateDTO.getPublishedDate() != null ) {
-            book.setPublishedDate( updateDTO.getPublishedDate() );
-        }
         if ( updateDTO.getPublisher() != null ) {
             book.setPublisher( updateDTO.getPublisher() );
+        }
+        if ( updateDTO.getLanguage() != null ) {
+            book.setLanguage( updateDTO.getLanguage() );
         }
         if ( updateDTO.getRating() != null ) {
             book.setRating( updateDTO.getRating() );
         }
         if ( updateDTO.getReadStatus() != null ) {
             book.setReadStatus( updateDTO.getReadStatus() );
-        }
-        if ( updateDTO.getSubGenre() != null ) {
-            book.setSubGenre( updateDTO.getSubGenre() );
-        }
-        if ( updateDTO.getTitle() != null ) {
-            book.setTitle( updateDTO.getTitle() );
         }
 
         setAuthorsFromIds( updateDTO, book );
@@ -149,38 +149,38 @@ public class BookMapperImpl extends BookMapper {
             return;
         }
 
-        if ( patchDTO.getCoverImage() != null ) {
-            book.setCoverImage( patchDTO.getCoverImage() );
-        }
-        if ( patchDTO.getDescription() != null ) {
-            book.setDescription( patchDTO.getDescription() );
+        if ( patchDTO.getTitle() != null ) {
+            book.setTitle( patchDTO.getTitle() );
         }
         if ( patchDTO.getIsbn() != null ) {
             book.setIsbn( patchDTO.getIsbn() );
         }
-        if ( patchDTO.getLanguage() != null ) {
-            book.setLanguage( patchDTO.getLanguage() );
+        if ( patchDTO.getPublishedDate() != null ) {
+            book.setPublishedDate( patchDTO.getPublishedDate() );
+        }
+        if ( patchDTO.getDescription() != null ) {
+            book.setDescription( patchDTO.getDescription() );
+        }
+        if ( patchDTO.getCoverImage() != null ) {
+            book.setCoverImage( patchDTO.getCoverImage() );
+        }
+        if ( patchDTO.getSubGenre() != null ) {
+            book.setSubGenre( patchDTO.getSubGenre() );
         }
         if ( patchDTO.getPageCount() != null ) {
             book.setPageCount( patchDTO.getPageCount() );
         }
-        if ( patchDTO.getPublishedDate() != null ) {
-            book.setPublishedDate( patchDTO.getPublishedDate() );
-        }
         if ( patchDTO.getPublisher() != null ) {
             book.setPublisher( patchDTO.getPublisher() );
+        }
+        if ( patchDTO.getLanguage() != null ) {
+            book.setLanguage( patchDTO.getLanguage() );
         }
         if ( patchDTO.getRating() != null ) {
             book.setRating( patchDTO.getRating() );
         }
         if ( patchDTO.getReadStatus() != null ) {
             book.setReadStatus( patchDTO.getReadStatus() );
-        }
-        if ( patchDTO.getSubGenre() != null ) {
-            book.setSubGenre( patchDTO.getSubGenre() );
-        }
-        if ( patchDTO.getTitle() != null ) {
-            book.setTitle( patchDTO.getTitle() );
         }
 
         setAuthorsFromIds( patchDTO, book );
@@ -208,11 +208,11 @@ public class BookMapperImpl extends BookMapper {
 
         BookSummaryDTO.BookSummaryDTOBuilder bookSummaryDTO = BookSummaryDTO.builder();
 
-        bookSummaryDTO.coverImage( book.getCoverImage() );
         bookSummaryDTO.id( book.getId() );
+        bookSummaryDTO.title( book.getTitle() );
         bookSummaryDTO.isbn( book.getIsbn() );
         bookSummaryDTO.subGenre( book.getSubGenre() );
-        bookSummaryDTO.title( book.getTitle() );
+        bookSummaryDTO.coverImage( book.getCoverImage() );
 
         return bookSummaryDTO.build();
     }

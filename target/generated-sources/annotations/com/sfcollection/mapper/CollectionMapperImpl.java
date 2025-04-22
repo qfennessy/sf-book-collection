@@ -15,8 +15,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-04-21T18:13:12-0400",
-    comments = "version: 1.5.5.Final, compiler: Eclipse JDT (IDE) 3.42.0.z20250331-1358, environment: Java 21.0.6 (Eclipse Adoptium)"
+    date = "2025-04-21T21:08:41-0400",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Homebrew)"
 )
 @Component
 public class CollectionMapperImpl implements CollectionMapper {
@@ -33,11 +33,11 @@ public class CollectionMapperImpl implements CollectionMapper {
         CollectionDTO.CollectionDTOBuilder collectionDTO = CollectionDTO.builder();
 
         collectionDTO.books( bookSetToBookSummaryDTOSet( collection.getBooks() ) );
-        collectionDTO.dateCreated( collection.getDateCreated() );
-        collectionDTO.description( collection.getDescription() );
         collectionDTO.id( collection.getId() );
-        collectionDTO.lastModified( collection.getLastModified() );
         collectionDTO.name( collection.getName() );
+        collectionDTO.description( collection.getDescription() );
+        collectionDTO.dateCreated( collection.getDateCreated() );
+        collectionDTO.lastModified( collection.getLastModified() );
 
         return collectionDTO.build();
     }
@@ -50,11 +50,11 @@ public class CollectionMapperImpl implements CollectionMapper {
 
         Collection.CollectionBuilder collection = Collection.builder();
 
-        collection.dateCreated( collectionDTO.getDateCreated() );
-        collection.description( collectionDTO.getDescription() );
         collection.id( collectionDTO.getId() );
-        collection.lastModified( collectionDTO.getLastModified() );
         collection.name( collectionDTO.getName() );
+        collection.description( collectionDTO.getDescription() );
+        collection.dateCreated( collectionDTO.getDateCreated() );
+        collection.lastModified( collectionDTO.getLastModified() );
 
         return collection.build();
     }
@@ -82,10 +82,10 @@ public class CollectionMapperImpl implements CollectionMapper {
         CollectionSummaryDTO.CollectionSummaryDTOBuilder collectionSummaryDTO = CollectionSummaryDTO.builder();
 
         collectionSummaryDTO.bookCount( countBooks( collection.getBooks() ) );
-        collectionSummaryDTO.description( collection.getDescription() );
         collectionSummaryDTO.id( collection.getId() );
-        collectionSummaryDTO.lastModified( collection.getLastModified() );
         collectionSummaryDTO.name( collection.getName() );
+        collectionSummaryDTO.description( collection.getDescription() );
+        collectionSummaryDTO.lastModified( collection.getLastModified() );
 
         return collectionSummaryDTO.build();
     }

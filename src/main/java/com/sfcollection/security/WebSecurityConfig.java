@@ -61,26 +61,40 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        // Use explicit AntPathRequestMatcher for all patterns to avoid MvcRequestMatcher issues
         http
             .csrf(AbstractHttpConfigurer::disable)
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authorizeHttpRequests(auth -> auth
-                // OpenAPI endpoints
-                .requestMatchers("/swagger-ui/**", "/api-docs/**", "/v3/api-docs/**").permitAll()
-                // Authentication endpoints
-                .requestMatchers("/api/v1/auth/**").permitAll()
-                // Health check and metrics endpoints
-                .requestMatchers("/actuator/**").permitAll()
-                // H2 console (dev only)
-                .requestMatchers("/h2-console/**").permitAll()
-                // GET requests
-                .requestMatchers(HttpMethod.GET, "/api/v1/books/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/v1/authors/**").permitAll()
-                .requestMatchers(HttpMethod.GET, "/api/v1/collections/**").permitAll()
-                // All other requests need authentication
-                .anyRequest().authenticated()
+            .authorizeHttpRequests(auth -> 
+                auth
+                    // OpenAPI endpoints
+                    .requestMatchers(
+                        new org.springframework.security.web.util.matcher.AntPathRequestMatcher("/swagger-ui/**"),
+                        new org.springframework.security.web.util.matcher.AntPathRequestMatcher("/api-docs/**"),
+                        new org.springframework.security.web.util.matcher.AntPathRequestMatcher("/v3/api-docs/**")
+                    ).permitAll()
+                    // Authentication endpoints
+                    .requestMatchers(
+                        new org.springframework.security.web.util.matcher.AntPathRequestMatcher("/api/v1/auth/**")
+                    ).permitAll()
+                    // Health check and metrics endpoints
+                    .requestMatchers(
+                        new org.springframework.security.web.util.matcher.AntPathRequestMatcher("/actuator/**")
+                    ).permitAll()
+                    // H2 console
+                    .requestMatchers(
+                        new org.springframework.security.web.util.matcher.AntPathRequestMatcher("/h2-console/**")
+                    ).permitAll()
+                    // GET requests
+                    .requestMatchers(
+                        new org.springframework.security.web.util.matcher.AntPathRequestMatcher("/api/v1/books/**", HttpMethod.GET.name()),
+                        new org.springframework.security.web.util.matcher.AntPathRequestMatcher("/api/v1/authors/**", HttpMethod.GET.name()),
+                        new org.springframework.security.web.util.matcher.AntPathRequestMatcher("/api/v1/collections/**", HttpMethod.GET.name())
+                    ).permitAll()
+                    // All other requests need authentication
+                    .anyRequest().authenticated()
             );
         
         // Add JWT filter
